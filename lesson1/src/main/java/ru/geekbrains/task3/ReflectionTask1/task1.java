@@ -1,4 +1,8 @@
 package ru.geekbrains.task3.ReflectionTask1;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 //Задача 1:
 //        Создайте абстрактный класс "Animal" с полями "name" и "age".
 //        Реализуйте два класса-наследника от "Animal" (например, "Dog" и "Cat") с уникальными полями и методами.
@@ -6,11 +10,24 @@ package ru.geekbrains.task3.ReflectionTask1;
 //        Выведите на экран информацию о каждом объекте.
 //        Вызовите метод "makeSound()" у каждого объекта, если такой метод присутствует.
 public class task1 {
-    public static void main(String[] args) {
-        Cat cat = new Cat("Barsik",10);
+    public static void main(String[] args) throws IllegalAccessException, NoSuchMethodException {
+        Cat cat = new Cat("Barsik", 10);
         Dog dog = new Dog("Kac", 5);
-        cat.toSing();
-        dog.toSing();
+        Animal[] animals = new Animal[]{new Cat("BARSIK", 5), new Dog("Kac", 5)};
+        for (Animal a : animals
+        ) {
+            inforMationAboutAnimals(a);
+        }
+    }
 
+    static void inforMationAboutAnimals(Object obj) throws IllegalAccessException, NoSuchMethodException {
+        Class<?> clazz = obj.getClass();
+        Field[] fields = clazz.getDeclaredFields();
+        Method methods = clazz.getDeclaredMethod("toSing");
+        for (Field f : fields
+             ) {
+            System.out.print(f.get(obj)+ " ");
+        }
+        System.out.println(methods.getName());
     }
 }
