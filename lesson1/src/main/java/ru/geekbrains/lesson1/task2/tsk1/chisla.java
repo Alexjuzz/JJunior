@@ -1,5 +1,7 @@
 package ru.geekbrains.lesson1.task2.tsk1;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +13,7 @@ public class chisla {
     public static void main(String[] args) {
 
         System.out.println(i.stream().mapToInt(Integer::intValue).average());
-
     }
+
 
 }
